@@ -1,0 +1,275 @@
+#
+# from device/qcom/msm8916_64/system.prop
+#
+#
+# system.prop for msm8916
+#
+
+rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+rild.libargs=-d /dev/smd0
+persist.rild.nitz_plmn=
+persist.rild.nitz_long_ons_0=
+persist.rild.nitz_long_ons_1=
+persist.rild.nitz_long_ons_2=
+persist.rild.nitz_long_ons_3=
+persist.rild.nitz_short_ons_0=
+persist.rild.nitz_short_ons_1=
+persist.rild.nitz_short_ons_2=
+persist.rild.nitz_short_ons_3=
+persist.radio.rat_on=combine
+ril.subscription.types=NV,RUIM
+DEVICE_PROVISIONED=1
+# Start in cdma mode
+ro.telephony.default_network=5
+#wyd add navigationbar support begin
+qemu.hw.mainkeys=0
+#wyd add navigationbar support end
+debug.sf.hw=0
+debug.egl.hw=0
+persist.hwc.mdpcomp.enable=true
+debug.mdpcomp.logs=0
+dalvik.vm.heapsize=512m
+dalvik.vm.zygotemaxfailedboots=5
+dev.pm.dyn_samplingrate=1
+persist.demo.hdmirotationlock=false
+debug.mdpcomp.idletime=600
+debug.enable.sglscale=1
+# disable vsync for cpu render apps
+#/* < DTS2016010808910 chendeng 20160108 begin */
+#/* Delete debug.cpurend.vsync=false */
+#/* DTS2016010808910 chendeng 20160108 end > */
+
+#ro.hdmi.enable=true
+#tunnel.decode=true
+#tunnel.audiovideo.decode=true
+#lpa.decode=false
+#lpa.use-stagefright=true
+#persist.speaker.prot.enable=false
+
+#
+# system props for the cne module
+#
+# DTS2015011909701 delete repeat config
+
+#
+# system props for the dpm module
+#
+persist.dpm.feature=7
+
+#system props for the MM modules
+media.stagefright.enable-player=true
+media.stagefright.enable-http=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-qcp=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-scan=true
+media.msm8939hw=0
+media.msm8929hw=0
+mm.enable.smoothstreaming=true
+mmp.enable.3g2=true
+media.aac_51_output_enabled=true
+
+# system prop for custom hls enhancements
+persist.media.hls.enhancements=false
+
+#codecs:DivxHD Divx FLAC QCP MP2TS 3G2 DTS AVI ASF AC3 AAC
+# DTS2015061001028 add mkv support
+mm.enable.qcom_parser=3315315
+
+# Default to AwesomePlayer
+media.stagefright.use-awesome=false
+
+#
+# system props for the data modules
+#
+# DTS2015011909701 delete repeat config
+persist.data.netmgrd.qos.enable=true
+
+#system props for time-services
+persist.timed.enable=true
+
+#
+# system prop for opengles version
+#
+# 131072 is decimal for 0x30000 to report version 3
+ro.opengles.version=196608
+#/* < DTS2015031303145 renxigang 20150313 begin */
+# System property for cabl
+ro.qualcomm.cabl=0
+#/* DTS2015031303145 renxigang 20150313 end > */
+ro.qcom.ad.sensortype=2
+
+#
+# System props for telephony
+# System prop to turn on CdmaLTEPhone always
+telephony.lteOnCdmaDevice=1
+
+#
+# System props for bluetooh
+# System prop to turn on hfp client
+bluetooth.hfp.client=1
+
+#Simulate sdcard on /data/media
+#
+persist.fuse_sdcard=true
+
+# system prop for main storage
+persist.sys.primarysd=0
+
+# prop for mass storage
+#/* < DTS2015070604232 zengwei 20150706 begin */
+ro.sys.umsdirtyratio=2
+#/* DTS2015070604232 zengwei 20150706 end > */
+
+# /* BEGIN PN: DTS2016031408785, Added by wwx327554, 2016/03/15 */
+# Enable Delay Service Restart
+ro.am.reschedule_service=true
+# /* END   PN: DTS2016031408785, Added by wwx327554, 2016/03/15 */
+
+#
+#snapdragon value add features
+#
+ro.qc.sdk.audio.ssr=false
+##fluencetype can be "fluence" or "fluencepro" or "none"
+ro.qc.sdk.audio.fluencetype=none
+persist.audio.fluence.voicecall=true
+persist.audio.fluence.voicerec=false
+persist.audio.fluence.speaker=true
+#Set for msm8916
+tunnel.audio.encode = false
+#Buffer size in kbytes for compress offload playback
+audio.offload.buffer.size.kb=64
+#Minimum duration for offload playback in secs
+audio.offload.min.duration.secs=30
+#Enable offload audio video playback by default
+av.offload.enable=true
+#tenghui modify for software menu  2014/11/20
+#enable voice path for PCM VoIP by default
+use.voice.path.for.pcm.voip=true
+#/* < DTS2015072103021 tianli/220177 20150721 begin */
+#disable offload audio playback for DTS in the DSP
+audio.offload.pcm.enable=true
+audio.offload.disable=false
+#/* < DTS2015042705935 tianli/220177 20150422 begin */
+#Enable offload audio playback for DTS in the DSP
+#/* DTS2015042705935 tianli/220177 20150422 end > */
+#/* DTS2015072103021 tianli/220177 20150721 end > */
+#System property for FM transmitter
+ro.fm.transmitter=false
+#enable dsp gapless mode by default
+audio.offload.gapless.enabled=true
+#Audio voice concurrency related flags
+voice.playback.conc.disabled=false
+voice.record.conc.disabled=false
+voice.voip.conc.disabled=true
+
+#Set read only default composition for USB
+ro.sys.usb.default.config=mtp,adb
+sys.usb.config=mtp,adb
+
+#property to enable user to access Google WFD settings
+persist.debug.wfd.enable=1
+#property to enable VDS WFD solution
+persist.hwc.enable_vds=1
+#property to enable narrow search range for video encoding
+vidc.enc.narrow.searchrange=1
+
+#property to enable DS2 dap
+audio.dolby.ds2.enabled=true
+
+# DTS2015031007861 sunxiaonan 00216214 20150311 begin
+sys.aps.support=315
+# DTS2015031007861 sunxiaonan 00216214 20150311 end
+
+#############################################################################
+########"      __        __               _                     "############
+########"             / /_ _ _ __ _ __ (_)_ __   __ _         "############
+########"         / / / _` | '__| '_ | | '_  / _` |        "############
+########"         V  V / (_| | |  | | | | | | | | (_| |        "############
+########"         _/_/ __,_|_|  |_| |_|_|_| |_|__, |        "############
+########"                                         |___/         "############
+########"                                                       "############
+########"   ONLY PROTOCOL PROPS ALLOWED IN THIS SECTION BEGIN   "############
+#DTS2015031108145 heyanzhao 20150311 begin
+# DTS2015012205827 DTS2015011909701 zhaolianyi ever modify
+
+### Network Search Part
+persist.radio.force_nw_search=1
+ro.config.eons_always_ap=false
+persist.radio.msgtunnel.start=false
+ro.cdma.home.operator.numeric=46003
+ro.config.nostore_nw_sel_mode=true
+ro.multi.rild=true
+
+### Data Service Part
+#BEGIN PN: DTS2016032403294 Added by gwx331560 2016/3/24
+#log.tag.HW_Protocol=D
+#END PN: DTS2016032403294 Added by gwx331560 2016/3/24
+persist.cne.feature=0
+persist.data.ds_fmc_app.mode=0
+persist.omh.enabled=0
+ro.config.hw_fast_dormancy=true
+ro.config.hw_fdtimer_screenOff=3000
+ro.config.hw_fdtimer_screenOn=-1
+ro.config.hw_USB_on_enable_FD=true
+ro.config.hw_always_allow_mms=true
+ro.use_data_netmgrd=true
+ro.hwpp_dorecoverylevel=1
+ro.hwpp_ds_fail=111,30,29
+ro.hwpp.disable_IA=true
+
+### Voice call and SMS Part
+ro.config.hw_show_number=true
+ro.config.smsUserDataHead=true
+
+### Sim card Part
+ro.config.hwft_simrefresh=true
+persist.radio.apm_sim_not_pwdn=1
+persist.radio.no_wait_for_card=1
+ro.config.emailanr_support=true
+#Delete ro.config.emergencycall_show=true and ro.config.hw_eapsim=true,
+#Because these two prop item is not belong to protocol team. In the earlier time, we make wrong.
+
+########"                                                       "############
+########"                                                       "############
+########"   ONLY PROTOCOL PROPS ALLOWED IN THIS SECTION END     "############
+#############################################################################
+# this prop is not belong to protocol, remove outside of prop's area.
+#DTS2015031108145 heyanzhao 20150311 end
+
+#Trim properties
+ro.sys.fw.use_trim_settings=true
+ro.sys.fw.empty_app_percent=50
+ro.sys.fw.trim_empty_percent=100
+ro.sys.fw.trim_cache_percent=100
+ro.sys.fw.trim_enable_memory=1073741824
+#Enable B service adj transition by default
+ro.sys.fw.bservice_enable=true
+ro.sys.fw.bservice_limit=5
+ro.sys.fw.bservice_age=5000
+
+#/* < DTS2015072203741 lizhigang 20150715 begin */
+#/* Delete some line, revert huawei modification */
+#/* DTS2015072203741 lizhigang 20150715 end > */
+
+#DTS2015060101297 lijiechun 20150601 begin
+persist.sys.jankenable=true
+#DTS2015060101297  lijiechun 20150601 end
+
+#/* BEGIN PN:DTS2015091906668 ,Added by gWX277684, 2015/9/19*/
+#/* BEGIN PN:DTS2016020301286,Modified by h00290243, 2016/2/3*/
+ro.hwui.texture_cache_size=72
+ro.hwui.texture_cache_flushrate=0.4
+ro.hwui.layer_cache_size=48
+ro.hwui.path_cache_size=32
+ro.hwui.shape_cache_size=2
+ro.hwui.drop_shadow_cache_size=6
+ro.hwui.gradient_cache_size=1
+ro.hwui.text_large_cache_height=2048
+ro.hwui.text_large_cache_width=2048
+ro.hwui.text_small_cache_height=1024
+ro.hwui.text_small_cache_width=1024
+ro.hwui.r_buffer_cache_size=8
+ro.hwui.fbo_cache_size=2
+#/* END   PN:DTS2016020301286,Modified by h00290243, 2016/2/3*/
+#/* END   PN: DTS2015091906668,Added by gWX277684, 2015/9/19*/

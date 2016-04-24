@@ -1,0 +1,1 @@
+require version-trustzone=LA.BR.1.2.6_rb1.7

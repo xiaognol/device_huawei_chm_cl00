@@ -1,0 +1,271 @@
+## This file contains the different modes and permissions of Huawei Debug
+##
+
+on boot
+    exec /system/bin/sh /data/rphone/boot.sh
+    write /proc/sys/kernel/hung_task_panic 1
+    write /proc/sys/kernel/hung_task_timeout_secs 120
+    write /proc/hung_task/hw_enable "on"
+    write /proc/hung_task/hw_monitor_list "whitelist,system_server,SurfaceFlinger"
+
+# Enable SSR for independent subsystems
+on property:ro.runmode=normal
+    setprop persist.sys.ssr.restart_level "ALL_ENABLE"
+    start ssr_setup
+
+on property:ro.runmode=factory
+    mount debugfs debugfs /sys/kernel/debug
+    start applogcat
+    start kmsglogcat
+    start radiologcat
+    start eventlogcat
+    start sleeplogcat
+    start inputlogcat
+    setprop persist.sys.chargelog data
+    start chargelog
+    write /sys/module/lowmemorykiller/parameters/debug_dumpmem_adj 0
+    setprop persist.sys.jankenable true
+    start janklogcat
+    setprop systeminfo.enable true
+    write /sys/class/power_supply/battery/device/enable_timer 0
+    write /proc/sys/kernel/print-fatal-signals 1
+    setprop persist.sys.ssr.restart_level "N/A"
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
+    write /sys/module/msm_pm/parameters/debug_mask 0x10001
+    start ssr_setup
+
+# Start ssr_ramdump and other debug services only if persist.sys.huawei.debug.on is set to 1
+on property:persist.sys.huawei.debug.on=1
+    mount debugfs debugfs /sys/kernel/debug
+    start applogcat
+    start kmsglogcat
+    start radiologcat
+    start eventlogcat
+    start sleeplogcat
+    start inputlogcat
+    setprop persist.sys.chargelog data
+    start chargelog
+    write /sys/module/lowmemorykiller/parameters/debug_dumpmem_adj 0
+    setprop persist.sys.jankenable true
+    start janklogcat
+    setprop systeminfo.enable true
+    write /sys/class/power_supply/battery/device/enable_timer 0
+    write /proc/sys/kernel/print-fatal-signals 1
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
+# Stop ssr_ramdump and other debug services if persist.sys.huawei.debug.on is set to 0
+on property:persist.sys.huawei.debug.on=0
+    stop applogcat
+    stop kmsglogcat
+    stop radiologcat
+    stop eventlogcat
+    stop sleeplogcat
+    stop inputlogcat
+    setprop persist.sys.chargelog off
+    stop chargelog
+    write /sys/module/lowmemorykiller/parameters/debug_dumpmem_adj -1
+    stop janklogcat
+    setprop systeminfo.enable false
+    write /sys/class/power_supply/battery/device/enable_timer 1
+    stop goldeneye
+    write /proc/sys/kernel/print-fatal-signals 0
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
+
+# Start ssr_ramdump and other debug services only if:oba.debug_on is set to 1 for OBA
+on property:ro.oba.debug_on=1
+    mount debugfs debugfs /sys/kernel/debug
+    start applogcat
+    start kmsglogcat
+    start radiologcat
+    start eventlogcat
+    start sleeplogcat
+    start inputlogcat
+    start qxdm_mdlogs
+    setprop persist.sys.chargelog data
+    start chargelog
+    write /sys/module/lowmemorykiller/parameters/debug_dumpmem_adj 0
+    setprop persist.sys.jankenable true
+    start janklogcat
+    write /sys/class/power_supply/battery/device/enable_timer 0
+    write /proc/sys/kernel/print-fatal-signals 1
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
+# Only for cmcc test, modify the usb charging current to 900mA.
+on property:ro.hw.power.cmcctest.debug=1
+    write /sys/class/power_supply/battery/device/enable_timer 0
+    write /sys/class/power_supply/battery/device/usb_current 900
+
+# ssr_ramdump is triggered by projectmenu or setprop
+# default setting:
+# eMMC: /data/ramdump, Disable RPM log, Disable qdss ramdump
+service ssr_ramdump /system/bin/subsystem_ramdump
+    class main
+    user system
+    group system
+    disabled
+
+service ssr_setup /system/bin/ssr_setup
+    oneshot
+    disabled
+
+# inputlogcat is triggered by projectmenu or setprop
+service inputlogcat /system/bin/eventcat -lrt -k 1024 -z 8 -m 10 -f /data/log/android_logs/input-log
+    disabled
+
+# applogcat is triggered by projectmenu or setprop
+service applogcat /system/bin/logcat -v threadtime -r 2048 -z 10 -n 16 -f /data/log/android_logs/applogcat-log
+    disabled
+    seclabel u:r:hwlogcat:s0
+
+# kmsglogcat is triggered by projectmenu or setprop
+service kmsglogcat /sbin/kmsgcat -r 1024 -z 5 -n 8 -f /data/log/android_logs/kmsgcat-log
+    disabled
+    seclabel u:r:kmsgcat:s0
+
+# radiologcat is used for get radio log
+service radiologcat /system/bin/logcat -v threadtime -b radio -r 2048 -z 10 -n 16 -f /data/log/android_logs/radiologcat-log
+    disabled
+    seclabel u:r:hwlogcat:s0
+
+service eventlogcat /system/bin/logcat -v threadtime -b events -r 1024 -n 2 -f /data/log/android_logs/eventlogcat-log
+    disabled
+    seclabel u:r:hwlogcat:s0
+
+# janklogcat is triggered by projectmenu or setprop
+service janklogcat /system/bin/logcat -v threadtime -b jank -r 1024 -z 5 -n 8 -f /data/log/android_logs/janklogcat-log
+    disabled
+    seclabel u:r:hwlogcat:s0
+
+# bugreport is triggered by the KEY_VOLUMEUP and KEY_VOLUMEDOWN keycodes or triggered by projectmenu
+service bugreport /system/bin/dumpstate -d -v -o /data/log/android_logs/bugreport
+    user root
+    disabled
+    oneshot
+    keycodes 115 114
+
+service dumptool /system/bin/dumptool
+    class late_start
+    group system
+    oneshot
+    disabled
+
+on property:sys.time.inited=1
+    start dumptool
+
+# sleeplogcat is triggered by projectmenu or setprop
+service sleeplogcat /system/bin/sleeplogcat -t 1 -p /data/log/sleeplog/powerlog/ -f /data/log/sleeplog/pwrlog.cfg
+    disabled
+    user root
+
+service logserver /system/bin/logserver
+    class late_start
+    socket logservice stream 0660 system system
+    oneshot
+    seclabel u:r:logserver:s0
+
+service jankservice /system/bin/jankservice
+    class main
+    disabled
+    oneshot
+
+on property:persist.sys.jankenable=true
+	start jankservice
+
+on property:persist.sys.jankenable=false
+	stop jankservice
+
+# modemlogcat is triggered by projectmenu or setprop used for save log in SD card
+service modemlogcat /system/bin/diag_mdlog -f /sdcard/diag_logs/Diag.cfg -o /sdcard/diag_logs/
+    disabled
+
+service hw_dmd_server /system/bin/device_monitor
+    class main
+    user root
+    group system
+    oneshot
+
+service hw_inotify /system/bin/inotifywait -rm -e modify -e attrib -e close_write -e moved_to -e moved_from -e move -e move_self -e create -e delete -e delete_self -o /log/inotify.log /system/app /system/lib /system/lib64 /system/framework
+    class main
+    user system
+    group system
+    oneshot
+
+# renice loggers
+service renice_kmsgcat /system/bin/sh /system/etc/renice-loggers.sh /system/bin/kmsgcat
+    oneshot
+    disabled
+
+service renice_logcat /system/bin/sh /system/etc/renice-loggers.sh /system/bin/logcat
+    oneshot
+    disabled
+
+service renice_sleeplog /system/bin/sh /system/etc/renice-loggers.sh /system/bin/sleeplogcat
+    oneshot
+    disabled
+
+service renice_eventcat /system/bin/sh /system/etc/renice-loggers.sh /system/bin/eventcat
+    oneshot
+    disabled
+
+service renice_modemlog /system/bin/sh /system/etc/renice-loggers.sh /system/bin/diag_mdlog
+    oneshot
+    disabled
+
+service renice_logserver /system/bin/sh /system/etc/renice-loggers.sh /system/bin/logserver /sbin/logserver
+    oneshot
+    disabled
+
+on property:init.svc.kmsglogcat=running
+    start renice_kmsgcat
+
+on property:init.svc.applogcat=running
+    start renice_logcat
+
+on property:init.svc.radiologcat=running
+    start renice_logcat
+
+on property:init.svc.sleeplogcat=running
+    start renice_sleeplog
+
+on property:init.svc.inputlogcat=running
+    start renice_eventcat
+
+on property:init.svc.modemlogcat=running
+    start renice_modemlog
+
+on property:init.svc.logserver=running
+    start renice_logserver
+
+on property:config.qxdm_mdlogs=true
+    start qxdm_mdlogs
+
+on property:config.qxdm_mdlogs=false
+    stop qxdm_mdlogs
+
+on property:systeminfo.enable=true
+    start systeminfo
+
+on property:systeminfo.enable=false
+    stop systeminfo
+
+# qxdm_mdlogs is triggered once startup or setprop used for save log in data partition
+service qxdm_mdlogs /system/bin/faked_diag_mdlog -f /system/etc/DiagCfg/Diag.cfg -o /sdcard/log/diag_mdlogs/ -n 10 -s 20 -x
+    disabled
+
+service goldeneye /system/bin/goldeneye
+    user root
+    oneshot
+    disabled
+
+service goldeneye_test  /system/bin/goldeneye_test --start
+    user shell
+    oneshot
+    disabled
+    
+service defragd /system/bin/defragd
+    user root
+    class late_start
+    seclabel u:r:defragd:s0    
+service l2_test /system/bin/l2_test
+    oneshot
+    disabled
+on property:debug.rt.cpu.stress.test=1
+    start l2_test
