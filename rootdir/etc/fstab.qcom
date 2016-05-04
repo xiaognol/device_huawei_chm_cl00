@@ -18,5 +18,4 @@
 /devices/platform/msm_hsusb*                 auto              auto    defaults                                          voldmanaged=usb:auto
 /dev/block/zram0                             none              swap    defaults                                          zramsize=536870912
 /devices/platform/msm_hsusb*              /storage/usbotg    vfat     nosuid,nodev                                                 wait,voldmanaged=usbotg:auto
-/dev/block/bootdevice/by-name/config         /frp         emmc    defaults                                            defaults
 /dev/block/bootdevice/by-name/pad        /persistent         emmc    defaults                                            defaults

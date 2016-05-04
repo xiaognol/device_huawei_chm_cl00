@@ -58,11 +58,8 @@ TARGET_BOARD_INFO_FILE ?= $(DEVICE_PATH)/board-info.txt
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
-# Include path
-# TARGET_SPECIFIC_HEADER_PATH := msm-3.10/obj/KERNEL_OBJ/usr/include
-
 # Kernel
-TARGET_CUSTOM_KERNEL_HEADERS := msm-3.10/obj/KERNEL_OBJ/usr/include
+# TARGET_CUSTOM_KERNEL_HEADERS := msm-3.10/obj/KERNEL_OBJ/usr/include
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -70,8 +67,21 @@ BOARD_RAMDISK_OFFSET     := 0x01000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_PREBUILT_DT := true
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/huawei/chm_cl00/dt.img
-TARGET_PREBUILT_KERNEL := device/huawei/chm_cl00/kernel
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/huawei/chm_cl00/dt.img --kernel device/huawei/chm_cl00/kernel
+# TARGET_PREBUILT_KERNEL := device/huawei/chm_cl00/kernel
+TARGET_KERNEL_SOURCE := android_kernel_huawei_kiwi
+TARGET_KERNEL_CONFIG := cyanogenmod_kiwi-64_defconfig
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_USES_UNCOMPRESSED_KERNEL := true
+
+CHM_MODULES:
+	mkdir -p $(TARGET_OUT)/lib/modules
+	cp -r device/huawei/chm_cl00/modules/ $(TARGET_OUT)/lib/
+	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
+
+TARGET_KERNEL_MODULES = CHM_MODULES
 
 # Include path
 TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
@@ -94,7 +104,7 @@ USE_CUSTOM_AUDIO_POLICY := 1
 # AUDIO_FEATURE_ENABLED_DS2_DOLBY_DAP := true
 AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
 AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE := true
-# AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 BOARD_USES_ALSA_AUDIO := true
 COMMON_GLOBAL_CFLAGS += -DHUAWEI_SOUND_PARAM_PATH=\"/system/etc\"
 
@@ -106,10 +116,10 @@ QCOM_BT_USE_BTNV := true
 
 # Camera
 BOARD_CAMERA_SENSORS := s5k5e2_foxconn_hc0806 s5k5e2_ofilm_ohw5f02 ov13850_ofilm_ohwba03 ov13850_liteon_p13v01h
-COMMON_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
+# COMMON_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 TARGET_USE_VENDOR_CAMERA_EXT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
-TARGET_USE_COMPAT_GRALLOC_ALIGN := true
+# TARGET_USE_COMPAT_GRALLOC_ALIGN := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 
 # Charger
@@ -191,7 +201,7 @@ BLOCK_BASED_OTA := false
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+# BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
@@ -201,6 +211,11 @@ TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_PATH)/init/init_chm.cpp
 # Malloc
 
 MALLOC_IMPL := dlmalloc
+
+# CMHW
+BOARD_HARDWARE_CLASS := \
+    hardware/cyanogen/cmhw \
+    $(DEVICE_PATH)/cmhw
 
 # Touchscreen
 TARGET_TAP_TO_WAKE_NODE := "/sys/touch_screen/easy_wakeup_gesture"

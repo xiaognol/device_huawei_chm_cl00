@@ -30,8 +30,4 @@ $(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/prima; \
     ln -sf /data/misc/wifi/WCNSS_qcom_cfg.ini \
 	    $(TARGET_OUT)/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini)
 
-$(shell mkdir -p $(TARGET_OUT)/lib/modules; \
-	cp -r device/huawei/chm_cl00/modules/ $(TARGET_OUT)/lib/; \
-	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko)
-
 endif

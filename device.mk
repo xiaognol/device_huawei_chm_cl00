@@ -38,8 +38,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/acdbdata/Handset_cal.acdb:system/etc/Handset_cal.acdb \
     $(LOCAL_PATH)/audio/acdbdata/Hdmi_cal.acdb:system/etc/Hdmi_cal.acdb \
     $(LOCAL_PATH)/audio/acdbdata/Headset_cal.acdb:system/etc/Headset_cal.acdb \
-    $(LOCAL_PATH)/audio/acdbdata/Speaker_cal.acdb:system/etc/Speaker_cal.acdb \
-    $(LOCAL_PATH)/audio/acdbdata/WorkspaceFile.qwsp:system/etc/WorkspaceFile.qwsp
+    $(LOCAL_PATH)/audio/acdbdata/Speaker_cal.acdb:system/etc/Speaker_cal.acdb
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1280

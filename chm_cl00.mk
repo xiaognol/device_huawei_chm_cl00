@@ -53,7 +53,8 @@ PRODUCT_PACKAGES += \
     tinymix \
     libqcomvisualizer \
     libqcompostprocbundle \
-    libqcomvoiceprocessing
+    libqcomvoiceprocessing \
+    libaudioalsa
 
 # ANT+ stack
 PRODUCT_PACKAGES += \
@@ -128,7 +129,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml \
     $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
 
 PRODUCT_PACKAGES += \
@@ -147,8 +147,15 @@ PRODUCT_PACKAGES += \
     libstagefrighthw
 
 # mm-dash
-# PRODUCT_PACKAGES += \
-#    libextmedia_jni
+ PRODUCT_PACKAGES += \
+    libextmedia_jni
+
+# OmxVdecHevc
+ifneq ($(QCPATH),)
+
+PRODUCT_PACKAGES += libOmxVdecHevc
+
+endif
 
 # Power HAL
 PRODUCT_PACKAGES += \
@@ -243,9 +250,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
-
-PRODUCT_BOOT_JARS += \
-    qcmediaplayer
 
 # KEYHANDLER
 PRODUCT_PACKAGES += \

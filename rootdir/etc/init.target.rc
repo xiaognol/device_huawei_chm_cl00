@@ -35,7 +35,7 @@ on early-init
 
 
 on fs
-    export LD_SHIM_LIBS /system/lib64/libdmd.so|libshim_cutils.so:/system/lib/libdmd.so|libshim_cutils.so:/system/lib64/libcutils.so|libshim_cutils.so:/system/lib/libcutils.so|libshim_cutils.so:/system/lib64/libril.so|libshim_ril.so:/system/lib64/hw/sensors.msm8916.so|libshim_sensormanager.so:/system/bin/mm-pp-daemon|libshim_sensormanager.so:/system/lib/hw/camera.msm8916.so|libshim_cutils.so:/system/vendor/lib/libmmqjpeg_codec.so|libshim_sensormanager.so:/system/lib/libcamera_post_mediaserver.so|libshim_media.so:/system/vendor/lib/hw/sound_trigger.primary.msm8916.so|libshim_sound_trigger.so:/system/vendor/lib64/liblocationservice.so|libshim_gps.so:/system/lib/hw/audio.primary.msm8916.so|libshim_sound_trigger.so:/system/lib64/hw/audio.primary.msm8916.so|libshim_sound_trigger.so
+    export LD_SHIM_LIBS /system/lib64/libdmd.so|libshim_cutils.so:/system/lib/libdmd.so|libshim_cutils.so:/system/lib64/libcutils.so|libshim_cutils.so:/system/lib/libcutils.so|libshim_cutils.so:/system/lib64/libril.so|libshim_ril.so:/system/lib64/hw/sensors.msm8916.so|libshim_sensormanager.so:/system/bin/mm-pp-daemon|libshim_sensormanager.so:/system/lib/hw/camera.msm8916.so|libshim_cutils.so:/system/vendor/lib/libmmqjpeg_codec.so|libshim_sensormanager.so:/system/lib/libcamera_post_mediaserver.so|libshim_media.so:/system/vendor/lib/hw/sound_trigger.primary.msm8916.so|libshim_sound_trigger.so:/system/vendor/lib64/liblocationservice.so|libshim_gps.so
 # Symbols required for huawei blobs
    export LD_PRELOAD "libboringssl-compat.so"
    export LD_PRELOAD libNimsWrap.so
