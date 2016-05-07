@@ -68,6 +68,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/configs/audio_effects.conf:system/vendor/etc/audio_effects.conf
 
+# CM Networkmonitor Server
+
+# Audio configuration
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/init.networkmonitor.sh:system/etc/init.networkmonitor.sh
 # Bluetooth
 PRODUCT_PACKAGES += \
     init.qcom.bt.sh
@@ -207,13 +212,28 @@ PRODUCT_PACKAGES += \
     libcalmodule_common
 
 # NFC
-PRODUCT_PACKAGES += \
-    libnfc-nci \
-    libnfc_nci_jni \
-    nfc_nci.pn54x.default \
-    com.android.nfc_extras \
-    NfcNci \
-    Tag
+# PRODUCT_PACKAGES += \
+#    libnfc-nci \
+#    libnfc_nci_jni \
+#    nfc_nci.pn54x.default \
+#    com.android.nfc_extras \
+#    NfcNci \
+#    Tag
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    $(LOCAL_PATH)/configs/libnfc-brcm_chm.conf:system/etc/libnfc-brcm_chm.conf \
+    $(LOCAL_PATH)/configs/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
+    $(LOCAL_PATH)/configs/libnfc-nxp_chm.conf:system/etc/libnfc-nxp_chm.conf \
+    $(LOCAL_PATH)/configs/nfcee_access.xml:system/etc/nfcee_access.xml \
+    $(LOCAL_PATH)/configs/nfc-nci.conf:system/etc/nfc-nci.conf
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
+    packages/apps/Nfc/migrate_nfc.txt:system/etc/updatecmds/migrate_nfc.txt
 
 # Enhanced NFC
 $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)

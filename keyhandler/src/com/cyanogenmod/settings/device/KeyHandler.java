@@ -51,6 +51,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_REQUEST = 1;
 
     // Supported scancodes
+    private static final int KEY_DOUBLE_TAP = 59;
     private static final int FLIP_CAMERA_SCANCODE = 249;
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
     private static final int GESTURE_SWIPE_DOWN_SCANCODE = 251;
@@ -65,7 +66,8 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_WAKELOCK_DURATION = 3000;
 
     private static final int[] sSupportedGestures = new int[] {
-        FLIP_CAMERA_SCANCODE,
+        KEY_DOUBLE_TAP,
+	FLIP_CAMERA_SCANCODE,
         GESTURE_CIRCLE_SCANCODE,
         GESTURE_SWIPE_DOWN_SCANCODE,
         GESTURE_V_SCANCODE,
@@ -201,6 +203,12 @@ public class KeyHandler implements DeviceKeyHandler {
                 dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_NEXT);
                 doHapticFeedback();
                 break;
+            case KEY_DOUBLE_TAP: {
+               if (!mPowerManager.isScreenOn()) {
+                mPowerManager.wakeUpWithProximityCheck(SystemClock.uptimeMillis(), "wakeup-gesture-proximity");
+            	}
+                break;
+               }
             }
         }
     }
@@ -226,6 +234,10 @@ public class KeyHandler implements DeviceKeyHandler {
             mNotificationManager.setZenMode(sSupportedSliderModes.get(scanCode), null, TAG);
             doHapticFeedback();
         } else if (!mEventHandler.hasMessages(GESTURE_REQUEST)) {
+            if (event.getScanCode() == KEY_DOUBLE_TAP && !mPowerManager.isScreenOn()) {
+                mPowerManager.wakeUpWithProximityCheck(SystemClock.uptimeMillis(), "wakeup-gesture-proximity");
+                return true;
+            }
             Message msg = getMessageForKeyEvent(scanCode);
             boolean defaultProximity = mContext.getResources().getBoolean(
                 org.cyanogenmod.platform.internal.R.bool.config_proximityCheckOnWakeEnabledByDefault);

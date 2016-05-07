@@ -17,7 +17,7 @@ persist.radio.rat_on=combine
 ril.subscription.types=NV,RUIM
 ro.telephony.default_cdma_sub=0
 DEVICE_PROVISIONED=1
-ro.telephony.default_network=5,5
+ro.telephony.default_network=10,3
 ro.telephony.call_ring.multiple=false
 persist.radio.force_nw_search=1
 ro.config.eons_always_ap=false
@@ -98,10 +98,10 @@ media.aac_51_output_enabled=true
 drm.service.enabled=1
 
 # Audio
-ro.qc.sdk.audio.fluencetype=fluence
+ro.qc.sdk.audio.fluencetype=none
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
-persist.audio.fluence.speaker=false
+persist.audio.fluence.speaker=true
 
 # Audio
 av.offload.enable=true
@@ -113,6 +113,8 @@ audio.offload.pcm.16bit.enable=false
 audio.offload.pcm.24bit.enable=true
 use.voice.path.for.pcm.voip=true
 vidc.enc.narrow.searchrange=1
+
+ro.fm.transmitter=false
 
 # Net
 persist.data.netmgrd.qos.enable=true

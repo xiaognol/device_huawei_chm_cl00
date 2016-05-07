@@ -90,6 +90,11 @@ service ischarger /system/bin/sh /init.usb.charger.sh
 	user root
 	oneshot
 
+service networkcheck /system/bin/sh /system/etc/init.networkmonitor.sh
+	class main
+	user root
+	oneshot
+
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
@@ -162,6 +167,7 @@ on boot
 
 on property:sys.boot_completed=1
     start ischarger
+    start networkcheck
 
 # access permission for secure touch
     chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0020/secure_touch_enable

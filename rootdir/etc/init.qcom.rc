@@ -245,6 +245,15 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
+    # easywakeupgesture
+    chown system system /sys/touch_screen/easy_wakeup_gesture
+
+    # unlock gpufreq
+    write /sys/devices/soc.0/1c00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/min_pwrlevel 0
+
+    # open all cpus
+    write /sys/devices/system/cpu/cpu0/cor_ctl/min_cpus 4
+
 # msm specific files that need to be created on /data
 on post-fs-data
     # Create directory for TZ Apps
