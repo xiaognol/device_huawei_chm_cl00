@@ -28,7 +28,7 @@
 # /* disable init.qcom.usb.rc and init.qcom.usb.sh, we use init.usb.rc */
 import init.qcom.usb.rc
 import init.target.rc
-import /init.hw.debug.rc
+# import /init.hw.debug.rc
 import /init.${ro.hardware.cpucontrol}.rc
 
 on early-init
@@ -1051,6 +1051,14 @@ service wfdservice /system/bin/wfdservice
     class main
     user system
     group graphics audio camera inet net_bt net_bt_admin net_bt_stack drmrpc bluetooth media_rw media
+    disabled
+    oneshot
+
+on property:sys.wfdservice=enable
+    start wfdservice
+
+on property:sys.wfdservice=disable
+    stop wfdservice
 
 # set primary sd directory
 service preparesdservice /system/bin/vdc volume storagetosd

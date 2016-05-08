@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MonitorConfigs>
+<board name="RIO">
+  <watchpoint name="in_charge_cc_limit" watchEnabled="true">
+   <argument>800</argument>
+   <errorconfig number ="0" name="no_ibus">
+     <argument>50</argument>
+   </errorconfig>
+   <errorconfig number ="1" name="temperature_cross_board">
+     <argument>0</argument>
+     <argument>50</argument>
+   </errorconfig>
+   <errorconfig number ="2" name="temperature_abnormal">
+     <argument>10</argument>
+     <argument>45</argument>
+     <argument>50</argument>
+   </errorconfig>
+   <errorconfig number ="3" name="AC_nonStand">
+     <argument>2</argument>
+   </errorconfig>
+   <errorconfig number ="4" name="ibus_lower">
+     <argument>800</argument>
+   </errorconfig>
+   <errorconfig number ="5" name="system_big_consumer">
+     <argument>800</argument>
+     <argument>10</argument>
+     <argument>45</argument>
+     <argument>80</argument>
+   </errorconfig>
+  </watchpoint>
+  <config name ="is_ibus_can_be_sampled">
+    <value>1</value>
+  </config>  
+  <config name ="once_valid_chrg_time">
+    <value>30</value>
+  </config>
+  <config name ="monitor_interval_time">
+    <value>5</value>
+  </config>
+  <config name ="cc_valid_chrg_time">
+    <value>5</value>
+  </config>
+  <config name="temperature_stage_monitor" confEnable="true">
+    <stage_point>0</stage_point>
+    <stage_point>10</stage_point>
+    <stage_point>45</stage_point>
+    <stage_point>50</stage_point>
+  </config>
+  <config name="cc_ibus_stage_monitor" confEnable="true" IBus_class_select="1.2A">
+    <IBus_class name="1.2A">
+      <stage_point>0</stage_point>
+      <stage_point>500</stage_point>
+      <stage_point>900</stage_point>
+      <stage_point>1000</stage_point>
+      <stage_point>1500</stage_point>
+      <stage_point>2000</stage_point>
+    </IBus_class>
+    <IBus_class name="2.0A">
+      <stage_point>0</stage_point>
+      <stage_point>500</stage_point>
+      <stage_point>1000</stage_point>
+      <stage_point>1500</stage_point>
+      <stage_point>2000</stage_point>
+    </IBus_class>
+  </config>
+  <config name="hot_current_limit_monitor" confEnable="true">
+    <stage_point>900</stage_point>
+    <stage_point>1000</stage_point>
+    <stage_point>1500</stage_point>
+    <stage_point>2000</stage_point>
+  </config>
+</board>
+<board name="ATH">
+  <watchpoint name="in_charge_cc_limit" watchEnabled="true">
+   <argument>800</argument>
+   <errorconfig number ="0" name="no_ibus">
+     <argument>50</argument>
+   </errorconfig>
+   <errorconfig number ="1" name="temperature_cross_board">
+     <argument>0</argument>
+     <argument>50</argument>
+   </errorconfig>
+   <errorconfig number ="2" name="temperature_abnormal">
+     <argument>10</argument>
+     <argument>45</argument>
+     <argument>50</argument>
+   </errorconfig>
+   <errorconfig number ="3" name="AC_nonStand">
+     <argument>2</argument>
+   </errorconfig>
+   <errorconfig number ="4" name="ibus_lower">
+     <argument>800</argument>
+   </errorconfig>
+   <errorconfig number ="5" name="system_big_consumer">
+     <argument>800</argument>
+     <argument>10</argument>
+     <argument>45</argument>
+     <argument>80</argument>
+   </errorconfig>
+  </watchpoint>
+  <config name ="is_ibus_can_be_sampled">
+    <value>0</value>
+  </config>  
+  <config name ="once_valid_chrg_time">
+    <value>30</value>
+  </config>
+  <config name ="monitor_interval_time">
+    <value>5</value>
+  </config>
+  <config name ="cc_valid_chrg_time">
+    <value>5</value>
+  </config>
+  <config name="temperature_stage_monitor" confEnable="true">
+    <stage_point>0</stage_point>
+    <stage_point>10</stage_point>
+    <stage_point>45</stage_point>
+    <stage_point>50</stage_point>
+  </config>
+  <config name="hot_current_limit_monitor" confEnable="true">
+    <stage_point>900</stage_point>
+    <stage_point>1000</stage_point>
+    <stage_point>1500</stage_point>
+    <stage_point>2000</stage_point>
+  </config>
+</board>
+<board name="KIW">
+  <watchpoint name="in_charge_cc_limit" watchEnabled="true">
+   <argument>800</argument>
+   <errorconfig number ="0" name="no_ibus">
+     <argument>50</argument>
+   </errorconfig>
+   <errorconfig number ="1" name="temperature_cross_board">
+     <argument>0</argument>
+     <argument>50</argument>
+   </errorconfig>
+   <errorconfig number ="2" name="temperature_abnormal">
+     <argument>10</argument>
+     <argument>45</argument>
+     <argument>50</argument>
+   </errorconfig>
+   <errorconfig number ="3" name="AC_nonStand">
+     <argument>2</argument>
+   </errorconfig>
+   <errorconfig number ="4" name="ibus_lower">
+     <argument>800</argument>
+   </errorconfig>
+   <errorconfig number ="5" name="system_big_consumer">
+     <argument>800</argument>
+     <argument>10</argument>
+     <argument>45</argument>
+     <argument>80</argument>
+   </errorconfig>
+  </watchpoint>
+  <config name ="is_ibus_can_be_sampled">
+    <value>1</value>
+  </config>
+  <config name ="once_valid_chrg_time">
+    <value>30</value>
+  </config>
+  <config name ="monitor_interval_time">
+    <value>5</value>
+  </config>
+  <config name ="cc_valid_chrg_time">
+    <value>5</value>
+  </config>
+  <config name="temperature_stage_monitor" confEnable="true">
+    <stage_point>0</stage_point>
+    <stage_point>10</stage_point>
+    <stage_point>45</stage_point>
+    <stage_point>50</stage_point>
+  </config>
+  <config name="cc_ibus_stage_monitor" confEnable="true" IBus_class_select="1.2A">
+    <IBus_class name="1.2A">
+      <stage_point>0</stage_point>
+      <stage_point>500</stage_point>
+      <stage_point>900</stage_point>
+      <stage_point>1000</stage_point>
+      <stage_point>1500</stage_point>
+      <stage_point>2000</stage_point>
+    </IBus_class>
+    <IBus_class name="2.0A">
+      <stage_point>0</stage_point>
+      <stage_point>500</stage_point>
+      <stage_point>1000</stage_point>
+      <stage_point>1500</stage_point>
+      <stage_point>2000</stage_point>
+    </IBus_class>
+  </config>
+  <config name="hot_current_limit_monitor" confEnable="false">
+    <stage_point>900</stage_point>
+    <stage_point>1000</stage_point>
+    <stage_point>1500</stage_point>
+    <stage_point>2000</stage_point>
+  </config>
+</board>
+</MonitorConfigs>

@@ -245,6 +245,10 @@ on property:init.svc.surfaceflinger=stopped
 on property:init.svc.surfaceflinger=running
     start ppd
 
+service chargemonitor /system/bin/chargemonitor
+    class late_start
+    user system
+    group system
 
 on charger-fs
     mount ext4 /dev/block/bootdevice/by-name/userdata /data rw
