@@ -33,6 +33,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <bool name="doze_pulse_on_pick_up">true</bool>
 
     <!-- Show phone (voice) signal strength instead of data in mobile RSSI. -->
-    <bool name="config_showPhoneRSSIForData">false</bool>
+    <bool name="config_showPhoneRSSIForData">true</bool>
 
 </resources>
