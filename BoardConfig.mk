@@ -19,7 +19,7 @@ BOARD_VENDOR := huawei
 DEVICE_PATH := device/huawei/chm_cl00
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := chm-cl00,CHM-CL00
+TARGET_OTA_ASSERT_DEVICE := chm-cl00,CHM-CL00,ALE-CL00,ale-cl00
 
 # inherit from huawei common
 

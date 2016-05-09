@@ -50,6 +50,7 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.primary.msm8916 \
     audio_policy.msm8916 \
+    audio_amplifier.msm8916 \
     tinymix \
     libqcomvisualizer \
     libqcompostprocbundle \
@@ -89,6 +90,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libboringssl-compat \
     libshim_sensormanager \
+    libshim_sound_trigger \
     libshim_cutils \
     libshim_ril \
     libshim_media \
@@ -127,8 +129,8 @@ PRODUCT_PACKAGES += \
     keystore.msm8916
 
 # Lights
-PRODUCT_PACKAGES += \
-    lights.msm8916
+# PRODUCT_PACKAGES += \
+#    lights.msm8916
 
 # Sensors
 # PRODUCT_PACKAGES += \

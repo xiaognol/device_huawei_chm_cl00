@@ -57,43 +57,11 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         if (strstr(model, "huawei_fac_product_name") != NULL)
             break;
 
-    if (strstr(model, "RIO-L01") != NULL) {
-        property_set("ro.product.model", "HUAWEI RIO-L01");
-        property_set("ro.product.name", "RIO-L01");
-        property_set("ro.product.device", "hwRIO-L01");
-        property_set("ro.build.product", "RIO-L01");
-        property_set("ro.build.description", "RIO-L01-user 5.0 GRJ90 C432B140 release-keys");
-        property_set("ro.build.fingerprint", "HUAWEI/RIO-L01/hwRIO-L01:5.1/HuaweiRIO-L01/C432B140:user/release-keys");
-    }
-    else if (strstr(model, "RIO-L02") != NULL) {
-        property_set("ro.product.model", "HUAWEI RIO-L02");
-        property_set("ro.product.name", "RIO-L02");
-        property_set("ro.product.device", "hwRIO-L02");
-        property_set("ro.build.product", "RIO-L02");
-    }
-    else if (strstr(model, "RIO-L03") != NULL) {
-        property_set("ro.product.model", "HUAWEI RIO-L03");
-        property_set("ro.product.name", "RIO-L03");
-        property_set("ro.product.device", "hwRIO-L03");
-        property_set("ro.build.product", "RIO-L03");
-    }
-    else if (strstr(model, "RIO-AL00") != NULL) {
-        property_set("ro.product.model", "HUAWEI RIO-AL00");
-        property_set("ro.product.name", "RIO-AL00");
-        property_set("ro.product.device", "hwRIO-AL00");
-        property_set("ro.build.product", "RIO-AL00");
-    }
-    else if (strstr(model, "RIO-CL00") != NULL) {
-        property_set("ro.product.model", "HUAWEI RIO-CL00");
-        property_set("ro.product.name", "RIO-CL00");
-        property_set("ro.product.device", "hwRIO-CL00");
-        property_set("ro.build.product", "RIO-CL00");
-    }
-    else if (strstr(model, "RIO-TL00") != NULL) {
-        property_set("ro.product.model", "HUAWEI RIO-TL00");
-        property_set("ro.product.name", "RIO-TL00");
-        property_set("ro.product.device", "hwRIO-TL00");
-        property_set("ro.build.product", "RIO-TL00");
+    if (strstr(model, "ALE-CL00") != NULL) {
+        property_set("ro.product.model", "HUAWEI ALE-CL00");
+        property_set("ro.product.name", "ALE-CL00");
+        property_set("ro.product.device", "hwALE-CL00");
+        property_set("ro.build.product", "ALE-CL00");
     }
 	else if (strstr(model, "CHM-CL00") != NULL) {
         property_set("ro.product.model", "HUAWEI CHM-CL00");
