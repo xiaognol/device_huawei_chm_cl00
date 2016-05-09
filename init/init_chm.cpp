@@ -62,11 +62,13 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.product.name", "ALE-CL00");
         property_set("ro.product.device", "hwALE-CL00");
         property_set("ro.build.product", "ALE-CL00");
+        property_set("qemu.hw.mainkeys", "0");
     }
 	else if (strstr(model, "CHM-CL00") != NULL) {
         property_set("ro.product.model", "HUAWEI CHM-CL00");
         property_set("ro.product.name", "CHM-CL00");
         property_set("ro.product.device", "hwCHM-CL00");
         property_set("ro.build.product", "CHM-CL00");
+	property_set("qemu.hw.mainkeys", "1");
     }
 }

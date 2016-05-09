@@ -142,9 +142,6 @@ persist.hwc.enable_vds=1
 #property to enable DS2 dap
 audio.dolby.ds2.enabled=false
 
-# vitual key
-qemu.hw.mainkeys=1
-
 # Camera
 persist.hw_camera.video_sta=true
 ro.build.hide.pic_size_match=4160x3120;4208x2368;3104x3104;3264x2448;3264x1836
