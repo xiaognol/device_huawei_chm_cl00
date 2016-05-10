@@ -221,3 +221,8 @@
 # Add device block for FRP
 /dev/block/bootdevice/by-name/config    0660   system     system
 /dev/block/bootdevice/by-name/pad    0660   system     system
+
+# for nxp smartPA
+/dev/i2c-1               0660   media      media
+/dev/i2c-0               0660   media      media
+/dev/i2c-6               0660   media      media

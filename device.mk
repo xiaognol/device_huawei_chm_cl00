@@ -31,15 +31,28 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/mixer_paths_qrd_skuh.xml:system/etc/mixer_paths_qrd_skuh.xml
 # ACDB Loader calibration
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/acdbdata/Bluetooth_cal.acdb:system/etc/Bluetooth_cal.acdb \
-    $(LOCAL_PATH)/audio/acdbdata/General_cal.acdb:system/etc/General_cal.acdb \
-    $(LOCAL_PATH)/audio/acdbdata/Global_cal.acdb:system/etc/Global_cal.acdb \
-    $(LOCAL_PATH)/audio/acdbdata/Handset_cal.acdb:system/etc/Handset_cal.acdb \
-    $(LOCAL_PATH)/audio/acdbdata/Hdmi_cal.acdb:system/etc/Hdmi_cal.acdb \
-    $(LOCAL_PATH)/audio/acdbdata/Headset_cal.acdb:system/etc/Headset_cal.acdb \
-    $(LOCAL_PATH)/audio/acdbdata/Speaker_cal.acdb:system/etc/Speaker_cal.acdb \
-    $(LOCAL_PATH)/audio/acdbdata/nxp/Tfa9895.cnt:system/etc/nxp/Tfa9895.cnt \
-    $(LOCAL_PATH)/audio/acdbdata/nxp/Tfa9895_coefficient.config:system/etc/nxp/Tfa9895_coefficient.config
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/Bluetooth_cal.acdb:system/etc/sound_param/chm_cl/Bluetooth_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/General_cal.acdb:system/etc/sound_param/chm_cl/General_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/Global_cal.acdb:system/etc/sound_param/chm_cl/Global_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/Handset_cal.acdb:system/etc/sound_param/chm_cl/Handset_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/Hdmi_cal.acdb:system/etc/sound_param/chm_cl/Hdmi_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/Headset_cal.acdb:system/etc/sound_param/chm_cl/Headset_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/Speaker_cal.acdb:system/etc/sound_param/chm_cl/Speaker_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/audio_para_version:system/etc/sound_param/chm_cl/audio_para_version \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/audio_platform_info.xml:system/etc/sound_param/chm_cl/audio_platform_info.xml \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/chm_cl/mixer_paths.xml:system/etc/sound_param/chm_cl/mixer_paths.xml \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/Bluetooth_cal.acdb:system/etc/sound_param/Alice/Bluetooth_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/General_cal.acdb:system/etc/sound_param/Alice/General_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/Global_cal.acdb:system/etc/sound_param/Alice/Global_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/Handset_cal.acdb:system/etc/sound_param/Alice/Handset_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/Hdmi_cal.acdb:system/etc/sound_param/Alice/Hdmi_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/Headset_cal.acdb:system/etc/sound_param/Alice/Headset_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/Speaker_cal.acdb:system/etc/sound_param/Alice/Speaker_cal.acdb \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/audio_para_version:system/etc/sound_param/Alice/audio_para_version \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/audio_platform_info.xml:system/etc/sound_param/Alice/audio_platform_info.xml \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/mixer_paths.xml:system/etc/sound_param/Alice/mixer_paths.xml \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/nxp/Tfa9895.cnt:system/etc/sound_param/Alice/nxp/Tfa9895.cnt \
+    $(LOCAL_PATH)/audio/acdbdata/sound_param/Alice/nxp/Tfa9895_coefficient.config:system/etc/sound_param/Alice/nxp/Tfa9895_coefficient.config
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1280
