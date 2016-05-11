@@ -35,12 +35,6 @@
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="15" />
         <device name="SND_DEVICE_OUT_VOICE_HEADPHONES" acdb_id="9" />
 
-        <device name="SND_DEVICE_IN_HANDSET_MIC" acdb_id="41" />
-        <device name="SND_DEVICE_IN_SPEAKER_MIC" acdb_id="67" />
-        <device name="SND_DEVICE_IN_HEADSET_MIC" acdb_id="8" />
-
-        <device name="SND_DEVICE_IN_VOICE_DMIC" acdb_id="41" />
-        <device name="SND_DEVICE_IN_CAMCORDER_MIC" acdb_id="34" />
     </acdb_ids>
 
     <pcm_ids>
