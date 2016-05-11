@@ -102,11 +102,8 @@ PRODUCT_PACKAGES += \
 
 # FM
 PRODUCT_PACKAGES += \
-    FM2 \
-    FMRecord \
-    libqcomfm_jni \
-    qcom.fmradio \
-    qcom.fmradio.xml
+    FMRadio \
+    libfmjni
 
 # Charger
 PRODUCT_PACKAGES += \
