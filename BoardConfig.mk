@@ -195,7 +195,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 BOARD_RIL_CLASS := ../../../device/huawei/chm_cl00/ril
 PROTOBUF_SUPPORTED := true
-TARGET_RIL_VARIANT := proprietary
+TARGET_RIL_VARIANT := caf
 # OTA
 BLOCK_BASED_OTA := true
 
@@ -216,6 +216,9 @@ MALLOC_IMPL := dlmalloc
 BOARD_HARDWARE_CLASS := \
     hardware/cyanogen/cmhw \
     $(DEVICE_PATH)/cmhw
+
+# Dexpreopt
+WITH_DEXPREOPT := true
 
 # Touchscreen
 TARGET_TAP_TO_WAKE_NODE := "/sys/touch_screen/easy_wakeup_gesture"

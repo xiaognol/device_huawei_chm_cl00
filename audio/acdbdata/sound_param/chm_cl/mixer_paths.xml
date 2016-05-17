@@ -22,9 +22,9 @@
     <ctl name="TTY Mode" value="Off" />
     <ctl name="HPHL Volume" value="9" />
     <ctl name="HPHR Volume" value="9" />
-    <ctl name="RX1 Digital Volume" value="84" />
-    <ctl name="RX2 Digital Volume" value="84" />
-    <ctl name="RX3 Digital Volume" value="84" />
+    <ctl name="RX1 Digital Volume" value="89" />
+    <ctl name="RX2 Digital Volume" value="89" />
+    <ctl name="RX3 Digital Volume" value="89" />
     <ctl name="IIR1 INP1 Volume" value="84" />
     <ctl name="IIR1 INP2 Volume" value="84" />
     <ctl name="IIR1 INP3 Volume" value="84" />
@@ -530,8 +530,8 @@
     <path name="speaker-mic">
         <path name="adc1" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
-        <ctl name="ADC1 Volume" value="6" />
-        <ctl name="DEC1 Volume" value="84" />
+        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="DEC1 Volume" value="89" />
     </path>
 
     <path name="handset">
@@ -545,8 +545,8 @@
 
     <path name="handset-mic">
         <path name="adc1" />
-        <ctl name="ADC1 Volume" value="6" />
-        <ctl name="DEC1 Volume" value="84" />
+        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="DEC1 Volume" value="89" />
     </path>
 
     <path name="headphones">
@@ -576,8 +576,8 @@
         <ctl name="MICBIAS CAPLESS Switch" value="1" />
         <ctl name="ADC2 MUX" value="INP2" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
-        <ctl name="ADC2 Volume" value="6" />
-        <ctl name="DEC2 Volume" value="84" />
+        <ctl name="ADC2 Volume" value="8" />
+        <ctl name="DEC2 Volume" value="89" />
     </path>
 
     <path name="sidetone-iir">
@@ -614,8 +614,8 @@
 
     <path name="voice-speaker-mic">
         <path name="speaker-mic" />
-        <ctl name="ADC1 Volume" value="6" />
-        <ctl name="DEC1 Volume" value="84" />
+        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="DEC1 Volume" value="89" />
     </path>
 
     <path name="voice-headphones">
@@ -626,16 +626,16 @@
 
     <path name="voice-headset-mic">
         <path name="headset-mic" />
-        <ctl name="ADC2 Volume" value="6" />
-        <ctl name="DEC2 Volume" value="84" />
+        <ctl name="ADC2 Volume" value="8" />
+        <ctl name="DEC2 Volume" value="89" />
     </path>
 
     <path name="speaker-and-headphones">
         <path name="headphones" />
         <path name="speaker" />
-	<ctl name="RX1 Digital Volume" value="83" />
-	<ctl name="RX2 Digital Volume" value="83" />
-	<ctl name="RX3 Digital Volume" value="83" />
+	<ctl name="RX1 Digital Volume" value="89" />
+	<ctl name="RX2 Digital Volume" value="89" />
+	<ctl name="RX3 Digital Volume" value="89" />
     </path>
 
     <path name="usb-headphones">

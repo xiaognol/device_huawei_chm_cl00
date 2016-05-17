@@ -64,7 +64,7 @@ ro.config.launcher_matchcard=1
 ro.hwpp_sig_stability_switch=true
 persist.radio.use_nv_force=false
 
-# ro.telephony.ril_class=HuaweiRIL
+ro.telephony.ril_class=HuaweiRIL
 
 # Display
 debug.sf.hw=0
@@ -98,6 +98,8 @@ media.aac_51_output_enabled=true
 drm.service.enabled=1
 
 # Audio
+af.fast_track_multiplier=1
+audio_hal.period_size=192
 ro.qc.sdk.audio.fluencetype=none
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
