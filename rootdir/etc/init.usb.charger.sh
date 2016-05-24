@@ -26,28 +26,51 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-ischarging=`cat /sys/class/power_supply/usb/present`
+bischarging=`cat /sys/class/power_supply/usb/present`
 isboot=`getprop sys.boot_completed`
-if [ "$isboot" == "0" ]; then
-        history=0
-else
-        history=`getprop sys.charger.history`
-
+ischarging=`cat /sys/class/power_supply/battery/status`
+history=`getprop sys.charger.history`
+historyboot=`getprop sys.charger.historyboot`
+if [-z "$history"]; then
+history=0
+fi
+if [-z "$historyboot"]; then
+historyboot=0
 fi
 
-if [ "$ischarging" == "0" ]; then
-        echo 1 > /sys/class/power_supply/usb/present
-		echo "present"
+if [ "$ischarging" == "Discharging" ]; then
+
+	if [ "$history" == "1" ]; then
+        echo 0 > /sys/class/power_supply/usb/present
+		echo "present disable"
+		echo 0 > /sys/class/power_supply/usb/online
+		echo "online disable"
+		echo "ischarge disable"
+	
+	else
+		echo 1 > /sys/class/power_supply/usb/present
+		echo "present enable"
 	    echo 1 > /sys/class/power_supply/usb/online
-		echo "online"
-		setprop sys.charger.history  1
-		echo "ischarge"
-
-else
-        if [ "$history" == "1" ]; then
-		echo 0 > /sys/class/power_supply/usb/present
-		echo "present0"
-	    echo 0 > /sys/class/power_supply/usb/online
-		echo "online0"
-		fi
+		echo "online enable"
+		echo "ischarge enable"
+		setprop sys.charger.historyboot  1
+	fi
 fi
+if [ "$ischarging" == "Charging" ]; then
+
+	if [ "$historyboot" == "1" ]; then
+        echo 0 > /sys/class/power_supply/usb/present
+		echo "present disable"
+		echo 0 > /sys/class/power_supply/usb/online
+		echo "online disable"
+		echo "ischarge disable"
+		echo 1 > /sys/class/power_supply/usb/present
+		echo "present enable"
+	    echo 1 > /sys/class/power_supply/usb/online
+		echo "online enable"
+		echo "ischarge enable"
+	else
+		setprop sys.charger.history  1
+	fi
+fi
+setprop sys.charger.history  1

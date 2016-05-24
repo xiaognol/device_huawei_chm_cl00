@@ -128,6 +128,7 @@ ro.sf.lcd_density=320
 qemu.hw.mainkeys=0
 ro.qcom.ad.sensortype=2
 ro.vendor.extension_library=libqti-perfd-client.so
+sys.hwc.gpu_perf_mode=1
 
 # NFC
 ro.nfc.port="I2C"
