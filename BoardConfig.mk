@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-DEVICE_PATH := device/huawei/kiwi
+DEVICE_PATH := device/huawei/chm_cl00
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
@@ -41,28 +41,37 @@ TARGET_CPU_CORTEX_A53 := true
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8916
 TARGET_NO_BOOTLOADER := true
-TARGET_OTA_ASSERT_DEVICE := kiwi
+TARGET_OTA_ASSERT_DEVICE := chm-cl00,CHM-CL00,ALE-CL00,ale-cl00
 
 # Kernel
-BOARD_KERNEL_BASE := 0x80000000
+BOARD_KERNEL_BASE        := 0x80000000
+BOARD_KERNEL_PAGESIZE    := 2048
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_RAMDISK_OFFSET     := 0x01000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.selinux=permissive
-BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_DTBTOOL_ARGS := -2
-BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
-BOARD_RAMDISK_OFFSET     := 0x02000000
-TARGET_KERNEL_SOURCE := kernel/huawei/kiwi
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
+TARGET_KERNEL_SOURCE := kernel/huawei/chm_cl00
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_USES_UNCOMPRESSED_KERNEL := true
-TARGET_KERNEL_CONFIG := cyanogenmod_kiwi-64_defconfig
+# TARGET_KERNEL_CONFIG := cyanogenmod_kiwi-64_defconfig
+
+CHM_MODULES:
+	mkdir -p $(TARGET_OUT)/lib/modules
+	cp -r kernel/huawei/chm_cl00/prebuilt/modules/ $(TARGET_OUT)/lib/
+	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
+
+TARGET_KERNEL_MODULES = CHM_MODULES
 
 # Audio
+AUDIO_FEATURE_ENABLED_DS2_DOLBY_DAP := true
 AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 BOARD_USES_ALSA_AUDIO := true
-COMMON_GLOBAL_CFLAGS += -DHUAWEI_SOUND_PARAM_PATH=\"/system/etc/sound_param/kiw_l/\"
+COMMON_GLOBAL_CFLAGS += -DHUAWEI_SOUND_PARAM_PATH=\"/system/etc/sound_param/default/\"
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -113,16 +122,17 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 # /proc/partitions * 2 * BLOCK_SIZE (512) = size in bytes
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 11618204672
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x04000000 # (40M)
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000 # (40M)
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1879048192
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 4513054208
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
-BOARD_PERSISTIMAGE_PARTITION_SIZE := 67108864
+BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_FLASH_BLOCK_SIZE := 131072 # blockdev --getbsz /dev/block/mmcblk0p19
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
+BOARD_POWER_CUSTOM_BOARD_LIB := libpower_chm
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
@@ -146,8 +156,8 @@ include device/qcom/sepolicy/sepolicy.mk
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_kiwi
-TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_PATH)/init/init_kiwi.c
+TARGET_INIT_VENDOR_LIB := libinit_chm
+TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_PATH)/init/init_chm.c
 
 # Vold
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
@@ -168,5 +178,21 @@ TARGET_USES_WCNSS_CTRL := true
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 
+# CHROMIUM PREBUILT
+# PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+
+# Dexpreopt
+WITH_DEXPREOPT := true
+
+# OTA
+BLOCK_BASED_OTA := true
+
+# MK Hardware
+BOARD_USES_MOKEE_HARDWARE := true
+BOARD_HARDWARE_CLASS += \
+	    device/huawei/chm_cl00/mkhw \
+	    hardware/mokee/mkhw
+
+
 # inherit from the proprietary version
--include vendor/huawei/kiwi/BoardConfigVendor.mk
+-include vendor/huawei/chm_cl00/BoardConfigVendor.mk

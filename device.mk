@@ -16,7 +16,7 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-$(call inherit-product-if-exists, vendor/huawei/kiwi/kiwi-vendor.mk)
+$(call inherit-product-if-exists, vendor/huawei/chm_cl00/chm_cl00-vendor.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
@@ -50,8 +50,8 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Boot animation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1280
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 720
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-2048-dalvik-heap.mk)
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
@@ -63,7 +63,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     audiod \
     audio.a2dp.default \
-    audio.primary.msm8916 \
     audio.r_submix.default \
     audio.usb.default \
     audio_amplifier.msm8916 \
@@ -76,7 +75,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
     $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/audio/audio_platform_info_ale.xml:system/etc/sound_param/Alice/audio_platform_info.xml \
+    $(LOCAL_PATH)/audio/audio_platform_info_chm.xml:system/etc/sound_param/chm_cl/audio_platform_info.xml \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths_skuk.xml
 
@@ -99,8 +99,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
-# CMHw
-BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/cmhw/src
+# MKHw
+BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/mkhw/src
 
 # Display
 PRODUCT_PACKAGES += \
@@ -143,6 +143,25 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/goodix.kl:system/usr/keylayout/goodix.kl \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
 
+# NFC
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    $(LOCAL_PATH)/configs/libnfc-brcm_chm.conf:system/etc/libnfc-brcm_chm.conf \
+    $(LOCAL_PATH)/configs/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
+    $(LOCAL_PATH)/configs/libnfc-nxp_chm.conf:system/etc/libnfc-nxp_chm.conf \
+    $(LOCAL_PATH)/configs/nfcee_access.xml:system/etc/nfcee_access.xml \
+    $(LOCAL_PATH)/configs/nfc-nci.conf:system/etc/nfc-nci.conf
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
+    packages/apps/Nfc/migrate_nfc.txt:system/etc/updatecmds/migrate_nfc.txt
+
+# Enhanced NFC
+$(call inherit-product, vendor/mk/config/nfc_enhanced.mk)
+
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8916
@@ -164,11 +183,7 @@ PRODUCT_PACKAGES += \
     libOmxQcelp13Enc \
     libOmxVdec \
     libOmxVenc \
-    libstagefrighthw \
-    qcmediaplayer
-
-PRODUCT_BOOT_JARS += \
-    qcmediaplayer
+    libstagefrighthw
 
 # Power HAL
 PRODUCT_PACKAGES += \
@@ -242,7 +257,25 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_wlan_dictionary.dat:system/etc/wifi/WCNSS_wlan_dictionary.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
 
+# KERNEL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/kernel:kernel \
+    $(LOCAL_PATH)/dt.img:dt.img
+
+# KEYHANDLER
+PRODUCT_PACKAGES += \
+    com.cyanogenmod.keyhandler
+
+PRODUCT_SYSTEM_SERVER_JARS += com.cyanogenmod.keyhandler
+
 # WiFi Display
 ifneq ($(QCPATH),)
 PRODUCT_BOOT_JARS += WfdCommon
 endif
+
+# Mokee Developer
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.mk.maintainer=xiaognol
+
+# never dexopt the keyhandler
+# $(call add-product-dex-preopt-module-config,qcmediaplayer,disable)

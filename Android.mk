@@ -15,23 +15,10 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),kiwi)
+ifeq ($(TARGET_DEVICE),chm_cl00)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
 include $(CLEAR_VARS)
-
-FP_IMAGES := \
-    fingerpr.b00 fingerpr.b01 fingerpr.b02 fingerpr.b03 fingerpr.mdt
-
-FP_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(KM_IMAGES)))
-$(KM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "Fingerprint firmware link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /firmware/image/$(notdir $@) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(FP_SYMLINKS)
-
 
 KM_IMAGES := \
     keymaste.b00 keymaste.b01 keymaste.b02 keymaste.b03 keymaste.mdt
@@ -90,5 +77,14 @@ ALL_DEFAULT_INSTALLED_MODULES += $(WCNSS_SYMLINKS)
 $(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/prima; \
     ln -sf /data/misc/wifi/WCNSS_qcom_cfg.ini \
 	    $(TARGET_OUT)/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini)
+
+$(shell mkdir -p $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ; \
+    cp -r $(TARGET_KERNEL_SOURCE)/prebuilt/* $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/ )
+
+$(shell mkdir -p $(TARGET_OUT)/lib/modules; \
+	cp -r kernel/huawei/chm_cl00/prebuilt/modules/ $(TARGET_OUT)/lib/; \
+	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko)
+
+$(shell cp -r kernel/huawei/chm_cl00/dt.img out/target/product/chm_cl00/dt.img )
 
 endif

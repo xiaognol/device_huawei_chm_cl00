@@ -16,6 +16,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),kiwi)
+ifeq ($(TARGET_DEVICE),chm_cl00)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
